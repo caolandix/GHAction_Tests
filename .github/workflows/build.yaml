@@ -49,6 +49,7 @@ jobs:
         with:
           # Specify your targeted Qt version
           version: '6.11.0'
+          aqtsource: 'git+https://github.com/miurahr/aqtinstall.git'
           # Select modules if your app uses non-core features (e.g., qtcharts)
           modules: 'qtshadertools'
 
