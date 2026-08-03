@@ -30,11 +30,14 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ninja-build libgl1-mesa-dev libxkbcommon-dev libxcb-cursor0
+          sudo apt-get install -y ninja-build libopencv-dev libgl1-mesa-dev libxkbcommon-dev libxcb-cursor0
 
-      - name: Install Windows Dependencies
+      - name: Install Windows Dependencies and OpenCV Paths
         if: matrix.os == 'windows-latest'
-        run: choco install ninja
+        run: |
+          choco install ninja opencv
+          echo "OPENCV_DIR=C:\tools\opencv\build" >> $GITHUB_ENV
+          echo "C:\tools\opencv\build\x64\vc16\bin" >> $GITHUB_PATH          
 
       # 3. Setup MSVC compiler environment on Windows
       - name: Setup MSVC (Windows Only)
