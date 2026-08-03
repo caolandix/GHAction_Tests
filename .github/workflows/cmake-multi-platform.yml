@@ -47,12 +47,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup C++ Environment
-      uses: aminya/setup-cpp@v1
+    - name: Setup CMake version
+      uses: jwlawson/actions-setup-cmake@v2
       with:
-        compiler: llvm
-        cmake: '4.3.2' # Installs the precise CMake version specified
-        ninja: true     # Installs Ninja build system generat 
+        cmake-version: '4.3.x' # Enforces the latest 3.28 patch release
 
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
