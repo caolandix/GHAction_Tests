@@ -7,3 +7,4 @@ Notes on what I found in developing a CI for a simple QT/OpenCV project:
 - Windows needed OpenCV_DIR to be explicitly defined on the cmake run line because setting it up under
   name: Install Windows Dependencies and OpenCV Paths wasn't enough. :p
 - Windows needed aqtsource's github repo to be explicitly defined
+- Linux build time was 1.5minutes approximately, Windows was almost 5min for the same thing. 
