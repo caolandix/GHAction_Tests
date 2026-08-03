@@ -59,7 +59,7 @@ jobs:
       # 5. Generate build scripts using CMake & Build via Ninja
       - name: Configure and Build Project
         run: |
-          cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+          cmake -S . -B build -G "Ninja" -D WITH_QT=ON -DCMAKE_BUILD_TYPE=Release
           cmake --build build --config Release
 
       # 6. Archive binary output files
