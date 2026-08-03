@@ -1,0 +1,60 @@
+name: Build Qt CMake C++ Project
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build Application
+    strategy:
+      matrix:
+        # Multi-platform matrix setup (Linux and Windows)
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # 1. Fetch the repository source code
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # 2. Install native system build requirements
+      - name: Install Linux Dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libgl1-mesa-dev libxkbcommon-dev libxcb-cursor0
+
+      - name: Install Windows Dependencies
+        if: matrix.os == 'windows-latest'
+        run: choco install ninja
+
+      # 3. Setup MSVC compiler environment on Windows
+      - name: Setup MSVC (Windows Only)
+        if: matrix.os == 'windows-latest'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # 4. Install Qt binaries automatically via aqtinstall
+      - name: Install Qt Framework
+        uses: jurplel/install-qt-action@v3
+        with:
+          # Specify your targeted Qt version
+          version: '6.5.2' 
+          # Select modules if your app uses non-core features (e.g., qtcharts)
+          modules: 'qtshadertools'
+
+      # 5. Generate build scripts using CMake & Build via Ninja
+      - name: Configure and Build Project
+        run: |
+          cmake -S . -B build -G "Ninja" -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+
+      # 6. Archive binary output files
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-app-${{ matrix.os }}
+          path: |
+            build/
