@@ -48,7 +48,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           # Specify your targeted Qt version
-          version: '6.8.8' 
+          version: '6.11' 
           # Select modules if your app uses non-core features (e.g., qtcharts)
           modules: 'qtshadertools'
 
