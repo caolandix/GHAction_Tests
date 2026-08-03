@@ -20,6 +20,11 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
+      - name: Setup CMake version
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '4.3.x' # Enforces the latest 4.3 patch release         
+
       # 2. Install native system build requirements
       - name: Install Linux Dependencies
         if: matrix.os == 'ubuntu-latest'
