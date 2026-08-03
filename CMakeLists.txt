@@ -13,12 +13,12 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
+qt_standard_project_setup()
+
 # Define executable with source files
 qt_add_executable(MyQtApp
     main.cpp
 )
-
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
-qt_standard_project_setup()
 
 target_link_libraries(MyQtApp PRIVATE Qt6::Widgets)
