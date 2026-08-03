@@ -42,14 +42,14 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.14.x' # Specify exact version or ranges like '3.x'
           cache: 'pip'           # Automatically caches pip dependencies        
 
       # 4. Install Qt binaries automatically via aqtinstall
       - name: Install Qt Framework
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           # Specify your targeted Qt version
           version: '6.8.8' 
@@ -64,7 +64,7 @@ jobs:
 
       # 6. Archive binary output files
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: built-app-${{ matrix.os }}
           path: |
