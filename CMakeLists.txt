@@ -16,6 +16,8 @@ set(CMAKE_AUTORCC ON)
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 find_package(OpenCV REQUIRED)
 
+set(OpenCV_DIR "C:/tools/opencv/build")
+
 qt_standard_project_setup()
 add_executable(QtOpenCVApp main.cpp)
 
